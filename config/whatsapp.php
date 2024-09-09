@@ -2,6 +2,16 @@
 
 return [
     /**
+     * The whatsapp api url to be used.
+     */
+    'api_url' => env('WHATSAPP_API_URL'),
+
+    /**
+     * The whatsapp api version to be used.
+     */
+    'api_version' => env('WHATSAPP_API_VERSION'),
+
+  /**
      * The whatsapp token to be used.
      */
     'token' => env('WHATSAPP_TOKEN'),

@@ -20,7 +20,7 @@ use MissaelAnda\Whatsapp\Messages\WhatsappMessage;
 class Whatsapp
 {
     public const WHATSAPP_API_URL = 'https://graph.facebook.com/v{{VERSION}}';
-    public const WHATSAPP_MESSAGE_API = 'messages';
+
     public const WHATSAPP_API_VERSION = '17.0';
 
     public function __construct(
@@ -273,8 +273,11 @@ class Whatsapp
 
     protected function buildApiEndpoint(string $for, bool $withNumberId = true): string
     {
-        return Str::of(static::WHATSAPP_API_URL)
-            ->replace('{{VERSION}}', static::WHATSAPP_API_VERSION)
+      $apiUrl = Config::get('whatsapp.api_url', static::WHATSAPP_API_URL);
+      $apiVersion = Config::get('whatsapp.api_version', static::WHATSAPP_API_VERSION);
+
+        return Str::of($apiUrl)
+            ->replace('{{VERSION}}', $apiVersion)
             ->when($withNumberId, fn ($str) => $str->append('/', $this->numberId))
             ->append('/', $for);
     }
